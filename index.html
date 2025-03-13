@@ -232,7 +232,7 @@
 
     <h4>Network Load Balancer Configurations</h4>
     <p>AWS Network Load Balancers distribute incoming application traffic across multiple targets, ensuring high availability and low latency.</p>
-    <ol start="21.1">
+    <ol start="A">
         <li>Created an Network Load Balancer (DemoNLB) configured for internet-facing traffic</li>
         <li>Deployed the NLB across multiple availability zones for high availability</li>
         <li>Created a dedicated security group (demo-sg-nlb) with appropriate rules</li>
@@ -266,6 +266,8 @@
     <ul>
         <li>Application-based cookies (custom or load balancer-generated)</li>
         <li>Duration-based cookies (AWSALB for ALB, AWSELB for Classic Load Balancer)</li>
+		<img src="Images/Demo_TG_ALB_Stickiness.png" alt="AWS-IAM Screenshot" width="400">
+		<img src="Images/Demo_TG_ALB_Stickiness_a.png" alt="AWS-IAM Screenshot" width="400">
     </ul>
     
     <h4>Cross-Zone Load Balancing</h4>
@@ -285,8 +287,8 @@
     <h4>SSL/TLS Certificate Implementation</h4>
     <p>To secure the application traffic, I explored SSL/TLS certificate implementation:</p>
     <ol start="33">
-        <li>Added HTTPS listener on port 443 for the ALB</li>
-        <li>Configured TLS listener for the NLB</li>
+        <li>Explored HTTPS listener on port 443 for the ALB</li>
+        <li>Explored Configuration for TLS listener for the NLB</li>
         <li>Explored certificate management options:
             <ul>
                 <li>Amazon Certificate Manager (ACM)</li>
@@ -305,7 +307,7 @@
             <strong>Solution</strong>: Configured sticky sessions with appropriate cookie settings and expiration policies</li>
         <li><strong>Challenge</strong>: Understanding the performance implications of cross-zone load balancing<br>
             <strong>Solution</strong>: Analyzed the default behaviors and cost implications for different load balancer types</li>
-    </ol>
+    </ol>	
     
     <h2 id="project-outcomes">Project Outcomes</h2>
     <p>This implementation achieved several key business objectives:</p>
@@ -354,7 +356,7 @@
             <ul>
                 <li><strong>Name</strong>: <code>my-demo-template</code></li>
                 <li><strong>Description</strong>: <code>Template for ASG demo</code></li>
-                <li><strong>AMI</strong>: Amazon Linux 2 (x86)</li>
+                <li><strong>AMI</strong>:e.g. Amazon Linux 2 (x86)</li>
                 <li><strong>Instance Type</strong>: t2.micro (Free tier eligible)</li>
                 <li><strong>Key Pair</strong>: EC2-tutorial (or your existing key pair)</li>
                 <li><strong>Security Group</strong>: Select an existing security group (e.g., launch-wizard-1)</li>
@@ -388,7 +390,11 @@ echo "&lt;h1&gt;Hello World from $(hostname -f)&lt;/h1&gt;" &gt; /var/www/html/i
             </ul>
         </li>
     </ol>
-    
+    <img src="Images/Demo_Launch_TemplateASG.png" alt="AWS-IAM Screenshot" width="400">
+	<img src="Images/Demo_ASG1.png" alt="AWS-IAM Screenshot" width="400">
+	<img src="Images/Demo_ASG2.png" alt="AWS-IAM Screenshot" width="400">
+	<img src="Images/Demo_ASG.png" alt="AWS-IAM Screenshot" width="400">
+	<img src="Images/Demo_ASG_Activity.png" alt="AWS-IAM Screenshot" width="400">
     <h3 id="integrating-lb">Integrating with Load Balancers</h3>
     <p>Connecting your ASG with a load balancer ensures traffic is distributed across healthy instances:</p>
     <ol start="57">
@@ -397,6 +403,8 @@ echo "&lt;h1&gt;Hello World from $(hostname -f)&lt;/h1&gt;" &gt; /var/www/html/i
         <li>Select your target group (e.g., <code>demo-tg-alb</code>)</li>
         <li>This integration ensures new instances are automatically registered with the load balancer</li>
         <li>When instances are terminated, they are automatically deregistered</li>
+		<img src="Images/Demo_TG_UnhealthInst.png" alt="AWS-IAM Screenshot" width="400">
+		<img src="Images/HealthyInst.png" alt="AWS-IAM Screenshot" width="400">
     </ol>
     
     <h3 id="health-check">Health Check Configuration</h3>
