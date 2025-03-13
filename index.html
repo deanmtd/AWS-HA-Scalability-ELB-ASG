@@ -182,7 +182,15 @@
         <li>Configured HTTP listener on port 80</li>
         <li>Created a target group (demo-tg-alb) and registered both EC2 instances</li>
         <li>Verified load balancer functionality by observing traffic distribution between instances</li>
+		<img src="Images/helloWorld2.png" alt="AWS-IAM Screenshot" width="400">
+		<img src="Images/helloWorld2.png" alt="AWS-IAM Screenshot" width="400">
     </ol>
+	<img src="Images/SG_Demo_ALB.png" alt="AWS-IAM Screenshot" width="400">
+	<img src="Images/Demo_TG_ALB.png" alt="AWS-IAM Screenshot" width="400">
+	<img src="Images/Demo_ALB.png" alt="AWS-IAM Screenshot" width="400">
+	<img src="Images/EC2_Second.png" alt="AWS-IAM Screenshot" width="400">
+	<img src="Images/PageAccess1.png" alt="AWS-IAM Screenshot" width="400">
+	<img src="Images/PageAccess2.png" alt="AWS-IAM Screenshot" width="400">
     <p>The ALB successfully distributed traffic between both instances in a round-robin fashion, as evidenced by the changing instance identifiers in the response upon refreshing the browser.</p>
     
     <h3 id="phase-3">Phase 3: Testing Fault Tolerance</h3>
@@ -193,6 +201,9 @@
         <li>Confirmed that all traffic was automatically redirected to the remaining healthy instance</li>
         <li>Restarted the stopped instance and verified it was automatically returned to service</li>
         <li>Observed traffic being distributed to both instances again</li>
+		<img src="Images/EC2_First_Stopped.png" alt="AWS-IAM Screenshot" width="400">
+		<img src="Images/TG_Status.png" alt="AWS-IAM Screenshot" width="400">
+		<img src="Images/Demo_ALB_Traffic.png" alt="AWS-IAM Screenshot" width="400">
     </ol>
     <p>This test confirmed that the load balancer could detect failed instances and automatically route traffic to healthy instances, providing continuous service availability.</p>
     
