@@ -425,7 +425,7 @@ echo "&lt;h1&gt;Hello World from $(hostname -f)&lt;/h1&gt;" &gt; /var/www/html/i
         <li>Ensure the new desired capacity is within the minimum and maximum capacity range</li>
         <li>The ASG will automatically launch or terminate instances to match the desired capacity</li>
     </ol>
-    
+    <img src="Images/Demo_ASG_DynamicScaling.png" alt="AWS-IAM Screenshot" width="400">
     <h3 id="target-tracking">Dynamic Scaling with Target Tracking</h3>
     <p>Target tracking is the simplest way to implement dynamic scaling:</p>
     <ol start="69">
@@ -439,17 +439,20 @@ echo "&lt;h1&gt;Hello World from $(hostname -f)&lt;/h1&gt;" &gt; /var/www/html/i
             </ul>
         </li>
         <li>The ASG will automatically adjust capacity to maintain the target metric value</li>
+		
+		
     </ol>
     <p>Implementation example:</p>
     <pre>Metric: Average CPU Utilization
 Target: 40%
 Scale Out: When CPU &gt; 40% for 3 consecutive data points (3 minutes)
 Scale In: When CPU &lt; 28% for 15 consecutive data points (15 minutes)</pre>
+
     
     <h3 id="step-scaling">Step Scaling</h3>
     <p>Step scaling provides more granular control over scaling actions:</p>
     <ol start="73">
-        <li>Create CloudWatch alarms for your scaling conditions</li>
+        <li>You can create CloudWatch alarms for your scaling conditions</li>
         <li>Configure step scaling policies with different adjustment amounts based on alarm thresholds</li>
         <li>For example:
             <ul>
@@ -469,7 +472,7 @@ Scale In: When CPU &lt; 28% for 15 consecutive data points (15 minutes)</pre>
     <h3 id="scheduled-scaling">Scheduled Scaling</h3>
     <p>Scheduled scaling is useful for predictable workload patterns:</p>
     <ol start="78">
-        <li>Navigate to "Scheduled Actions" in your ASG</li>
+        <li>Navigate to "Scheduled Actions" in your ASG, where you can:</li>
         <li>Create a schedule with specific capacity settings</li>
         <li>Configure the recurrence pattern (one-time, daily, weekly, etc.)</li>
         <li>Specify start and end times if applicable</li>
@@ -484,58 +487,58 @@ Scale In: When CPU &lt; 28% for 15 consecutive data points (15 minutes)</pre>
         <li>AWS will use machine learning to analyze historical patterns and scale proactively</li>
     </ol>
     
-    <h2 id="testing">Testing</h2>
+    <!h2 id="testing">Testing<!/h2>
     
-    <h3 id="stress-testing">Stress Testing</h3>
-    <p>To test dynamic scaling policies:</p>
-    <ol start="86">
-        <li>Connect to an EC2 instance using EC2 Instance Connect</li>
-        <li>Install the stress utility:
-            <pre>sudo amazon-linux-extras install epel -y
-sudo yum install stress -y</pre>
-        </li>
-        <li>Run a stress test to increase CPU utilization:
-            <pre>stress -c 4</pre>
-        </li>
-        <li>Monitor the ASG activities and CloudWatch metrics to observe scaling actions</li>
-    </ol>
+    <!h3 id="stress-testing">Stress Testing<!/h3>
+    <!p>To test dynamic scaling policies:<!/p>
+    <!ol start="86">
+        <!li>Connect to an EC2 instance using EC2 Instance Connect<!/li>
+        <!li>Install the stress utility:
+            <!pre>sudo amazon-linux-extras install epel -y
+sudo yum install stress -y<!/pre>
+        <!/li>
+        <!li>Run a stress test to increase CPU utilization:
+            <!pre>stress -c 4<!/pre>
+        <!/li>
+        <!li>Monitor the ASG activities and CloudWatch metrics to observe scaling actions<!/li>
+    <!/ol>
     
-    <h3 id="monitoring">Monitoring Scaling Activities</h3>
-    <ol start="90">
-        <li>Navigate to the "Activity" tab in your ASG</li>
-        <li>Review "Activity History" to see scaling actions</li>
-        <li>Check CloudWatch alarms to understand what triggered the scaling</li>
-        <li>Monitor instance states in the "Instance Management" tab</li>
-    </ol>
+    <!h3 id="monitoring">Monitoring Scaling Activities<!/h3>
+    <!ol start="90">
+        <!li>Navigate to the "Activity" tab in your ASG<!/li>
+        <!li>Review "Activity History" to see scaling actions<!/li>
+        <!li>Check CloudWatch alarms to understand what triggered the scaling<!/li>
+        <!li>Monitor instance states in the "Instance Management" tab<!/li>
+    <!/ol>
     
-    <h2 id="demo-results">Demonstration Results</h2>
-    <p>The following results were observed during testing:</p>
-    <ol start="94">
-        <li><strong>Initial State</strong>:
-            <ul>
-                <li>1 EC2 instance running</li>
-                <li>CPU utilization near 0%</li>
-                <li>Instance healthy and registered with the load balancer</li>
-            </ul>
-        </li>
-        <li><strong>After Stress Test Began</strong>:
-            <ul>
-                <li>CPU utilization increased to nearly 100%</li>
-                <li>CloudWatch alarm triggered (CPU &gt; 40%)</li>
-                <li>ASG scaled out from 1 to 2 instances</li>
-                <li>As CPU remained high, scaled to 3 instances</li>
-            </ul>
-        </li>
-        <li><strong>After Stress Test Ended</strong>:
-            <ul>
-                <li>CPU utilization dropped below 28%</li>
-                <li>After 15 consecutive data points, scale-in action triggered</li>
-                <li>ASG reduced capacity from 3 to 2 instances</li>
-                <li>After continued low utilization, reduced to 1 instance</li>
-            </ul>
-        </li>
+    <!h2 id="demo-results">Demonstration Results<!/h2>
+    <!p>The following results were observed during testing:<!/p>
+    <!ol start="94">
+        <!li><!strong>Initial State<!/strong>:
+            <!ul>
+                <!li>1 EC2 instance running<!/li>
+                <!li>CPU utilization near 0%<!/li>
+                <!li>Instance healthy and registered with the load balancer<!/li>
+            <!/ul>
+        <!/li>
+        <l!i><strong>After Stress Test Began<!/strong>:
+            <!ul>
+                <!li>CPU utilization increased to nearly 100%<!/li>
+                <!li>CloudWatch alarm triggered (CPU &gt; 40%)<!/li>
+                <!li>ASG scaled out from 1 to 2 instances<!/li>
+                <!li>As CPU remained high, scaled to 3 instances<!/li>
+            <!/ul>
+        <!/li>
+        <!li><!strong>After Stress Test Ended<!/strong>:
+            <!ul>
+                <!li>CPU utilization dropped below 28%<!/li>
+                <!li>After 15 consecutive data points, scale-in action triggered<!/li>
+                <!li>ASG reduced capacity from 3 to 2 instances<!/li>
+                <!li>After continued low utilization, reduced to 1 instance<!/li>
+            <!/ul>
+        <!/li>
     </ol>
-    <p>This demonstration confirmed the target tracking policy correctly adjusted capacity based on CPU utilization.</p>
+    <p!>This demonstration confirmed the target tracking policy correctly adjusted capacity based on CPU utilization.</p>
     
     <h2 id="best-practices">Best Practices and Recommendations</h2>
     <ol start="97">
