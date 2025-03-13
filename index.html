@@ -225,14 +225,14 @@
         <li>Created a custom routing rule with path-based routing</li>
         <li>Configured the rule to return a custom error response for requests to the "/error" path</li>
         <li>Set the rule priority to ensure proper processing order</li>
-		<img src="Images/Demo_404_Error_ALB_Rules.png" alt="AWS-IAM Screenshot" width="400">
-        <li>Tested the rule by accessing the "/error" path, confirming the custom error response</li>
 		<img src="Images/Demo_404_Error_ALB_Rule.png" alt="AWS-IAM Screenshot" width="400">
+        <li>Tested the rule by accessing the "/error" path, confirming the custom error response</li>
+		<img src="Images/PageNotFound404_Error.png" alt="AWS-IAM Screenshot" width="400">
     </ol>
 
     <h4>Network Load Balancer Configurations</h4>
     <p>AWS Network Load Balancers distribute incoming application traffic across multiple targets, ensuring high availability and low latency.</p>
-    <ol start="21">
+    <ol start="21.1">
         <li>Created an Network Load Balancer (DemoNLB) configured for internet-facing traffic</li>
         <li>Deployed the NLB across multiple availability zones for high availability</li>
         <li>Created a dedicated security group (demo-sg-nlb) with appropriate rules</li>
