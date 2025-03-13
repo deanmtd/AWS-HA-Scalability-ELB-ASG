@@ -188,7 +188,6 @@
 	<img src="Images/SG_Demo_ALB.png" alt="AWS-IAM Screenshot" width="400">
 	<img src="Images/Demo_TG_ALB.png" alt="AWS-IAM Screenshot" width="400">
 	<img src="Images/Demo_ALB.png" alt="AWS-IAM Screenshot" width="400">
-	<img src="Images/EC2_Second.png" alt="AWS-IAM Screenshot" width="400">
 	<img src="Images/PageAccess1.png" alt="AWS-IAM Screenshot" width="400">
 	<img src="Images/PageAccess2.png" alt="AWS-IAM Screenshot" width="400">
     <p>The ALB successfully distributed traffic between both instances in a round-robin fashion, as evidenced by the changing instance identifiers in the response upon refreshing the browser.</p>
@@ -215,6 +214,7 @@
         <li>Modified the EC2 instance security group to only accept traffic from the load balancer</li>
         <li>Removed direct public access to EC2 instances</li>
         <li>Verified that direct access to instances via public IPs was no longer possible</li>
+		<img src="Images/LaunchWiz_SG_Demo_ALB.png" alt="AWS-IAM Screenshot" width="400">
         <li>Confirmed that access through the ALB continued to function correctly</li>
     </ol>
     <p>This configuration ensures that all web traffic must flow through the load balancer, providing an additional security layer.</p>
@@ -225,8 +225,32 @@
         <li>Created a custom routing rule with path-based routing</li>
         <li>Configured the rule to return a custom error response for requests to the "/error" path</li>
         <li>Set the rule priority to ensure proper processing order</li>
+		<img src="Images/Demo_404_Error_ALB_Rules.png" alt="AWS-IAM Screenshot" width="400">
         <li>Tested the rule by accessing the "/error" path, confirming the custom error response</li>
+		<img src="Images/Demo_404_Error_ALB_Rule.png" alt="AWS-IAM Screenshot" width="400">
     </ol>
+
+    <h4>Network Load Balancer Configurations</h4>
+    <p>AWS Network Load Balancers distribute incoming application traffic across multiple targets, ensuring high availability and low latency.</p>
+    <ol start="21">
+        <li>Created an Network Load Balancer (DemoNLB) configured for internet-facing traffic</li>
+        <li>Deployed the NLB across multiple availability zones for high availability</li>
+        <li>Created a dedicated security group (demo-sg-nlb) with appropriate rules</li>
+        <li>Configured HTTP listener on port 80</li>
+        <li>Created a target group (demo-tg-nlb) and registered both EC2 instances</li>
+		<li>Created a dedicated security group (demo-sg-nlb) with appropriate rules</li>
+		<li>I also examined the instances and their associated security group by navigating to **Security** and then **Security Groups** to open it. 
+		<li>In the inbound rules, it was configured to allow **SSH** access from **anywhere** and **HTTP** access from this security group.</li>
+		<li>An additional rule was added to also allow **HTTP** traffic from our Network Load Balancer.</li>
+        <li>Finally, verified load balancer functionality by observing traffic distribution between instances</li>
+		<img src="Images/Demo_SG_NLB.png" alt="AWS-IAM Screenshot" width="400">
+		<img src="Images/Demo_TG_NLB.png" alt="AWS-IAM Screenshot" width="400">
+		<img src="Images/LaunchWiz1_SG_NLB.png" alt="AWS-IAM Screenshot" width="400">
+		<img src="Images/Demo_NLB.png" alt="AWS-IAM Screenshot" width="400">	
+		<img src="Images/Demo_NLB_Traffic1.png" alt="AWS-IAM Screenshot" width="400">	
+    </ol>
+    <p>The NLB successfully distributed traffic between both instances in a round-robin fashion, as evidenced by the changing instance identifiers in the response upon refreshing the browser.</p>
+    </ol>	
     <p>This demonstrates the ability to implement complex routing logic based on URL patterns, which is essential for modern web applications.</p>
     
     <h4>Session Stickiness Configuration</h4>
