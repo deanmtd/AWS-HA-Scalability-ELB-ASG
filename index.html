@@ -3,60 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS Load Balancing and Auto Scaling Implementation</title>
+    <title>AWS Cloud Architecture Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        :root {
+            --aws-orange: #FF9900;
+            --aws-dark-blue: #232F3E;
+            --aws-light-blue: #1A476F;
+            --aws-teal: #00A1C9;
+            --aws-light-bg: #F8F9FA;
+            --aws-gray: #545B64;
+            --aws-light-gray: #D5DBDB;
+            --aws-code-bg: #F1F3F3;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Amazon Ember', Arial, sans-serif;
+            line-height: 1.6;
             color: #333;
+            background-color: var(--aws-light-bg);
         }
         
-        h1, h2, h3 {
-            color: #0066cc;
+        header {
+            background-color: var(--aws-dark-blue);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
         }
         
-        h1 {
-            border-bottom: 2px solid #0066cc;
-            padding-bottom: 10px;
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            color: var(--aws-orange);
         }
         
-        h2 {
-            margin-top: 30px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
         }
         
-        ul, ol {
-            margin-left: 20px;
+        .aws-logo {
+            height: 40px;
+            margin-bottom: 10px;
         }
         
-        code {
-            background-color: #f5f5f5;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
         
-        pre {
-            background-color: #f5f5f5;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+        .page-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
         }
         
         .toc {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 30px;
+            background-color: var(--aws-light-bg);
+            border: 1px solid var(--aws-light-gray);
+            border-left: 5px solid var(--aws-orange);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 40px;
         }
         
         .toc h2 {
             margin-top: 0;
+            color: var(--aws-dark-blue);
+            border-bottom: 2px solid var(--aws-orange);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
         
         .toc ul {
@@ -70,493 +97,382 @@
         
         .toc a {
             text-decoration: none;
-            color: #0066cc;
+            color: var(--aws-light-blue);
+            padding: 5px 0;
+            display: inline-block;
+            transition: color 0.3s;
         }
         
         .toc a:hover {
+            color: var(--aws-orange);
             text-decoration: underline;
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--aws-dark-blue);
+        }
+        
+        h1 {
+            font-size: 2rem;
+            border-bottom: 3px solid var(--aws-orange);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            margin-top: 40px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 40px;
+            border-bottom: 2px solid var(--aws-light-gray);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            color: var(--aws-light-blue);
+            margin-bottom: 15px;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            margin-top: 25px;
+            color: var(--aws-gray);
+            margin-bottom: 10px;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        code {
+            background-color: var(--aws-code-bg);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            color: var(--aws-light-blue);
+        }
+        
+        pre {
+            background-color: var(--aws-code-bg);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            border-left: 4px solid var(--aws-orange);
+            margin-bottom: 20px;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid var(--aws-light-gray);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            margin: 10px 0;
+            padding: 5px;
+        }
+        
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .image-gallery img {
+            max-width: 400px;
+            height: auto;
+            flex: 1 0 auto;
+        }
+        
+        .service-icon {
+            color: var(--aws-orange);
+            margin-right: 5px;
+        }
+        
+        .aws-service {
+            background-color: rgba(255, 153, 0, 0.05);
+            border: 1px solid rgba(255, 153, 0, 0.2);
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .aws-service h3 {
+            color: var(--aws-dark-blue);
+            border-bottom: 1px solid var(--aws-light-gray);
+            padding-bottom: 10px;
+        }
+        
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tech-badge {
+            background-color: var(--aws-dark-blue);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background-color: var(--aws-dark-blue);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        footer a {
+            color: var(--aws-orange);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .page-content {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
+            }
+            
+            .image-gallery {
+                flex-direction: column;
+            }
+            
+            .image-gallery img {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="toc">
-        <h2>Contents</h2>
-        <ul>
-            <li><a href="#aws-load-balancing">AWS Load Balancing Implementation Project</a>
+    <header>
+        <div class="container">
+            <svg class="aws-logo" xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 304 182">
+                <path fill="#FF9900" d="M86.4 66.4c0 3.7.4 6.7 1.1 8.9.8 2.2 1.8 4.6 3.2 7.2.5.8.7 1.6.7 2.3 0 1-.6 2-1.9 3l-6.3 4.2c-.9.6-1.8.9-2.6.9-1 0-2-.5-3-1.4-1.4-1.5-2.6-3.1-3.6-4.7-1-1.7-2-3.6-3.1-6.1-7.8 9.2-17.6 13.8-29.4 13.8-8.4 0-15.1-2.4-20-7.2-4.9-4.8-7.4-11.2-7.4-19.2 0-8.5 3-15.4 9.1-20.6 6.1-5.2 14.2-7.8 24.5-7.8 3.4 0 6.9.3 10.6.8 3.7.5 7.5 1.3 11.5 2.2v-7.3c0-7.6-1.6-12.9-4.7-16-3.2-3.1-8.6-4.6-16.3-4.6-3.5 0-7.1.4-10.8 1.3-3.7.9-7.3 2-10.8 3.4-1.6.7-2.8 1.1-3.5 1.3-.7.2-1.2.3-1.6.3-1.4 0-2.1-1-2.1-3.1v-4.9c0-1.6.2-2.8.7-3.5.5-.7 1.4-1.4 2.8-2.1 3.5-1.8 7.7-3.3 12.6-4.5 4.9-1.3 10.1-1.9 15.6-1.9 11.9 0 20.6 2.7 26.2 8.1 5.5 5.4 8.3 13.6 8.3 24.6v32.4zm-40.6-14.5c3.3 0 6.7-.6 10.3-1.8 3.6-1.2 6.8-3.4 9.5-6.4 1.6-1.9 2.8-4 3.4-6.4.6-2.4 1-5.3 1-8.7v-4.2c-2.9-.7-6-1.3-9.2-1.7-3.2-.4-6.3-.6-9.4-.6-6.7 0-11.6 1.3-14.9 4-3.3 2.7-4.9 6.5-4.9 11.5 0 4.7 1.2 8.2 3.7 10.6 2.4 2.5 5.9 3.7 10.5 3.7zm80.3 20.2c-1.8 0-3-.3-3.8-1-.8-.6-1.5-2-2.1-3.9l-23.5-77.3c-.6-2-.9-3.3-.9-4 0-1.6.8-2.5 2.4-2.5h9.8c1.9 0 3.2.3 3.9 1 .8.6 1.4 2 2 3.9l16.8 66.2 15.6-66.2c.5-2 1.1-3.3 1.9-3.9.8-.6 2.2-1 4-1h8c1.9 0 3.2.3 4 1 .8.6 1.5 2 1.9 3.9l15.8 67 17.3-67c.6-2 1.3-3.3 2-3.9.8-.6 2.1-1 3.9-1h9.3c1.6 0 2.5.8 2.5 2.5 0 .5-.1 1-.2 1.6-.1.6-.3 1.4-.7 2.5l-24.1 77.3c-.6 2-1.3 3.3-2.1 3.9-.8.6-2.1 1-3.8 1h-8.6c-1.9 0-3.2-.3-4-1-.8-.7-1.5-2-1.9-4l-15.5-64.5-15.4 64.4c-.5 2-1.1 3.3-1.9 4-.8.7-2.2 1-4 1h-8.6zm128.5 2.7c-5.2 0-10.4-.6-15.4-1.8-5-1.2-8.9-2.5-11.5-4-1.6-.9-2.7-1.9-3.1-2.8-.4-.9-.6-1.9-.6-2.8v-5.1c0-2.1.8-3.1 2.3-3.1.6 0 1.2.1 1.8.3.6.2 1.5.6 2.5 1 3.4 1.5 7.1 2.7 11 3.5 4 .8 7.9 1.2 11.9 1.2 6.3 0 11.2-1.1 14.6-3.3 3.4-2.2 5.2-5.4 5.2-9.5 0-2.8-.9-5.1-2.7-7-1.8-1.9-5.2-3.6-10.1-5.2L246 52c-7.3-2.3-12.7-5.7-16-10.2-3.3-4.4-5-9.3-5-14.5 0-4.2.9-7.9 2.7-11.1 1.8-3.2 4.2-6 7.2-8.2 3-2.3 6.4-4 10.4-5.2 4-1.2 8.2-1.7 12.6-1.7 2.2 0 4.5.1 6.7.4 2.3.3 4.4.7 6.5 1.1 2 .5 3.9 1 5.7 1.6 1.8.6 3.2 1.2 4.2 1.8 1.4.8 2.4 1.6 3 2.5.6.8.9 1.9.9 3.3v4.7c0 2.1-.8 3.2-2.3 3.2-.8 0-2.1-.4-3.8-1.2-5.7-2.6-12.1-3.9-19.2-3.9-5.7 0-10.2.9-13.3 2.8-3.1 1.9-4.7 4.8-4.7 8.9 0 2.8 1 5.2 3 7.1 2 1.9 5.7 3.8 11 5.5l14.2 4.5c7.2 2.3 12.4 5.5 15.5 9.6 3.1 4.1 4.6 8.8 4.6 14 0 4.3-.9 8.2-2.6 11.6-1.8 3.4-4.2 6.4-7.3 8.8-3.1 2.5-6.8 4.3-11.1 5.6-4.5 1.4-9.2 2-14.3 2z"/>
+                <path fill="#232F3E" d="M273.5 143.7c-32.9 24.3-80.7 37.2-121.8 37.2-57.6 0-109.5-21.3-148.7-56.7-3.1-2.8-.3-6.6 3.4-4.4 42.4 24.6 94.7 39.5 148.8 39.5 36.5 0 76.6-7.6 113.5-23.2 5.5-2.5 10.2 3.6 4.8 7.6z"/>
+                <path fill="#232F3E" d="M287.2 128.1c-4.2-5.4-27.8-2.6-38.5-1.3-3.2.4-3.7-2.4-.8-4.5 18.8-13.2 49.7-9.4 53.3-5 3.6 4.5-1 35.4-18.6 50.2-2.7 2.3-5.3 1.1-4.1-1.9 4-9.9 12.9-32.2 8.7-37.5z"/>
+            </svg>
+            <h1>AWS Cloud Architecture Portfolio</h1>
+            <p>Implementing Load Balancing & Auto Scaling Solutions</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-content">
+            <div class="toc">
+                <h2>Contents</h2>
                 <ul>
-                    <li><a href="#project-overview">Project Overview</a></li>
-                    <li><a href="#business-context">Business Context</a></li>
-                    <li><a href="#technologies-used">Technologies Used</a></li>
-                    <li><a href="#implementation-details">Implementation Details</a>
+                    <li><a href="#aws-load-balancing"><i class="fas fa-network-wired service-icon"></i> AWS Load Balancing Implementation Project</a>
                         <ul>
-                            <li><a href="#phase-1">Phase 1: Setting Up the Backend Infrastructure</a></li>
-                            <li><a href="#phase-2">Phase 2: Implementing the Application Load Balancer</a></li>
-                            <li><a href="#phase-3">Phase 3: Testing Fault Tolerance</a></li>
-                            <li><a href="#phase-4">Phase 4: Advanced Load Balancer Configurations</a></li>
+                            <li><a href="#project-overview">Project Overview</a></li>
+                            <li><a href="#business-context">Business Context</a></li>
+                            <li><a href="#technologies-used">Technologies Used</a></li>
+                            <li><a href="#implementation-details">Implementation Details</a>
+                                <ul>
+                                    <li><a href="#phase-1">Phase 1: Setting Up the Backend Infrastructure</a></li>
+                                    <li><a href="#phase-2">Phase 2: Implementing the Application Load Balancer</a></li>
+                                    <li><a href="#phase-3">Phase 3: Testing Fault Tolerance</a></li>
+                                    <li><a href="#phase-4">Phase 4: Advanced Load Balancer Configurations</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#technical-challenges">Technical Challenges and Solutions</a></li>
+                            <li><a href="#project-outcomes">Project Outcomes</a></li>
+                            <li><a href="#key-learnings">Key Learnings</a></li>
                         </ul>
                     </li>
-                    <li><a href="#technical-challenges">Technical Challenges and Solutions</a></li>
-                    <li><a href="#project-outcomes">Project Outcomes</a></li>
-                    <li><a href="#key-learnings">Key Learnings</a></li>
+                    <li><a href="#auto-scaling-groups"><i class="fas fa-chart-line service-icon"></i> Auto Scaling Groups in AWS: Implementation and Best Practices</a>
+                        <ul>
+                            <li><a href="#architecture-overview">Architecture Overview</a></li>
+                            <li><a href="#implementation-steps">Implementation Steps</a>
+                                <ul>
+                                    <li><a href="#launch-template">Creating a Launch Template</a></li>
+                                    <li><a href="#setup-asg">Setting Up an Auto Scaling Group</a></li>
+                                    <li><a href="#integrating-lb">Integrating with Load Balancers</a></li>
+                                    <li><a href="#health-check">Health Check Configuration</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#scaling-policies">Scaling Policies</a>
+                                <ul>
+                                    <li><a href="#manual-scaling">Manual Scaling</a></li>
+                                    <li><a href="#target-tracking">Dynamic Scaling with Target Tracking</a></li>
+                                    <li><a href="#step-scaling">Step Scaling</a></li>
+                                    <li><a href="#simple-scaling">Simple Scaling</a></li>
+                                    <li><a href="#scheduled-scaling">Scheduled Scaling</a></li>
+                                    <li><a href="#predictive-scaling">Predictive Scaling</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#testing">Testing</a>
+                                <ul>
+                                    <li><a href="#stress-testing">Stress Testing</a></li>
+                                    <li><a href="#monitoring">Monitoring Scaling Activities</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#demo-results">Demonstration Results</a></li>
+                            <li><a href="#best-practices">Best Practices and Recommendations</a></li>
+                            <li><a href="#conclusion">Conclusion</a></li>
+                        </ul>
+                    </li>
                 </ul>
-            </li>
-            <li><a href="#auto-scaling-groups">Auto Scaling Groups in AWS: Implementation and Best Practices</a>
-                <ul>
-                    <li><a href="#architecture-overview">Architecture Overview</a></li>
-                    <li><a href="#implementation-steps">Implementation Steps</a>
-                        <ul>
-                            <li><a href="#launch-template">Creating a Launch Template</a></li>
-                            <li><a href="#setup-asg">Setting Up an Auto Scaling Group</a></li>
-                            <li><a href="#integrating-lb">Integrating with Load Balancers</a></li>
-                            <li><a href="#health-check">Health Check Configuration</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#scaling-policies">Scaling Policies</a>
-                        <ul>
-                            <li><a href="#manual-scaling">Manual Scaling</a></li>
-                            <li><a href="#target-tracking">Dynamic Scaling with Target Tracking</a></li>
-                            <li><a href="#step-scaling">Step Scaling</a></li>
-                            <li><a href="#simple-scaling">Simple Scaling</a></li>
-                            <li><a href="#scheduled-scaling">Scheduled Scaling</a></li>
-                            <li><a href="#predictive-scaling">Predictive Scaling</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#testing">Testing</a>
-                        <ul>
-                            <li><a href="#stress-testing">Stress Testing</a></li>
-                            <li><a href="#monitoring">Monitoring Scaling Activities</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#demo-results">Demonstration Results</a></li>
-                    <li><a href="#best-practices">Best Practices and Recommendations</a></li>
-                    <li><a href="#conclusion">Conclusion</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+            </div>
 
-    <h1 id="aws-load-balancing">AWS Load Balancing Implementation Project</h1>
-    
-    <h2 id="project-overview">Project Overview</h2>
-    <p>In this project, I've implemented and configured AWS Elastic Load Balancers to create a highly available and scalable web application infrastructure. This document demonstrates my understanding of AWS load balancing technologies, implementation approaches, and advanced configuration techniques.</p>
-    <p>It also demonstrates the implementation and configuration of Auto Scaling Groups (ASGs) in AWS to create a highly available, fault-tolerant, and elastically scalable web application architecture.</p>
-    
-    <h2 id="business-context">Business Context</h2>
-    <p>Modern web applications require high availability, fault tolerance, and the ability to scale with user demand. Load balancers are a critical component in achieving these requirements by distributing incoming traffic across multiple backend servers. This project demonstrates my ability to implement such solutions in AWS environments.</p>
-    
-    <h2 id="technologies-used">Technologies Used</h2>
-    <ul>
-        <li>Amazon EC2 (Elastic Compute Cloud)</li>
-        <li>Elastic Load Balancing (ELB)
+            <h1 id="aws-load-balancing"><i class="fas fa-network-wired service-icon"></i> AWS Load Balancing Implementation Project</h1>
+            
+            <div class="aws-service">
+                <h2 id="project-overview">Project Overview</h2>
+                <p>In this project, I've implemented and configured AWS Elastic Load Balancers to create a highly available and scalable web application infrastructure. This document demonstrates my understanding of AWS load balancing technologies, implementation approaches, and advanced configuration techniques.</p>
+                <p>It also demonstrates the implementation and configuration of Auto Scaling Groups (ASGs) in AWS to create a highly available, fault-tolerant, and elastically scalable web application architecture.</p>
+            </div>
+            
+            <h2 id="business-context">Business Context</h2>
+            <p>Modern web applications require high availability, fault tolerance, and the ability to scale with user demand. Load balancers are a critical component in achieving these requirements by distributing incoming traffic across multiple backend servers. This project demonstrates my ability to implement such solutions in AWS environments.</p>
+            
+            <h2 id="technologies-used">Technologies Used</h2>
+            <div class="tech-list">
+                <span class="tech-badge"><i class="fab fa-aws"></i> EC2</span>
+                <span class="tech-badge"><i class="fas fa-balance-scale"></i> ELB</span>
+                <span class="tech-badge"><i class="fas fa-server"></i> ALB</span>
+                <span class="tech-badge"><i class="fas fa-network-wired"></i> NLB</span>
+                <span class="tech-badge"><i class="fas fa-shield-alt"></i> Security Groups</span>
+                <span class="tech-badge"><i class="fas fa-bullseye"></i> Target Groups</span>
+                <span class="tech-badge"><i class="fas fa-heartbeat"></i> Health Checks</span>
+            </div>
             <ul>
-                <li>Application Load Balancer (ALB)</li>
-                <li>Network Load Balancer (NLB)</li>
-                <li>Gateway Load Balancer</li>
+                <li>Amazon EC2 (Elastic Compute Cloud)</li>
+                <li>Elastic Load Balancing (ELB)
+                    <ul>
+                        <li>Application Load Balancer (ALB)</li>
+                        <li>Network Load Balancer (NLB)</li>
+                        <li>Gateway Load Balancer</li>
+                    </ul>
+                </li>
+                <li>Security Groups</li>
+                <li>Target Groups</li>
+                <li>Health Checks</li>
             </ul>
-        </li>
-        <li>Security Groups</li>
-        <li>Target Groups</li>
-        <li>Health Checks</li>
-    </ul>
-    
-    <h2 id="implementation-details">Implementation Details</h2>
-    
-    <h3 id="phase-1">Phase 1: Setting Up the Backend Infrastructure</h3>
-    <p>The first step was to create the backend servers that would handle the application traffic:</p>
-    <ol>
-        <li>Launched two EC2 instances named "My First Instance" and "My Second Instance"</li>
-        <li>Used Amazon Linux 2 on t2.micro instances for cost-effectiveness</li>
-        <li>Configured a security group (Launch-Wizard-1) to allow HTTP and SSH traffic</li>
-        <li>Implemented a bootstrap script using EC2 user data to initialize a simple web server on each instance</li>
-        <li>Verified direct access to each instance via their public IP addresses</li>
-    </ol>
-    <p>Each instance displayed a simple "Hello World" message with a unique identifier, confirming they were operational and serving content independently.</p>
-    <img src="Images/helloWorld1.png" alt="AWS-IAM Screenshot" width="400">
-	<img src="Images/helloWorld2.png" alt="AWS-IAM Screenshot" width="400">
-    <h3 id="phase-2">Phase 2: Implementing the Application Load Balancer</h3>
-    <p>After establishing the backend infrastructure, I implemented an Application Load Balancer to distribute traffic:</p>
-    <ol start="6">
-        <li>Created an Application Load Balancer (DemoALB) configured for internet-facing traffic</li>
-        <li>Deployed the ALB across multiple availability zones for high availability</li>
-        <li>Created a dedicated security group (demo-sg-load-balancer) with appropriate rules</li>
-        <li>Configured HTTP listener on port 80</li>
-        <li>Created a target group (demo-tg-alb) and registered both EC2 instances</li>
-        <li>Verified load balancer functionality by observing traffic distribution between instances</li>
-		<img src="Images/helloWorld2.png" alt="AWS-IAM Screenshot" width="400">
-		<img src="Images/helloWorld2.png" alt="AWS-IAM Screenshot" width="400">
-    </ol>
-	<img src="Images/SG_Demo_ALB.png" alt="AWS-IAM Screenshot" width="400">
-	<img src="Images/Demo_TG_ALB.png" alt="AWS-IAM Screenshot" width="400">
-	<img src="Images/Demo_ALB.png" alt="AWS-IAM Screenshot" width="400">
-	<img src="Images/PageAccess1.png" alt="AWS-IAM Screenshot" width="400">
-	<img src="Images/PageAccess2.png" alt="AWS-IAM Screenshot" width="400">
-    <p>The ALB successfully distributed traffic between both instances in a round-robin fashion, as evidenced by the changing instance identifiers in the response upon refreshing the browser.</p>
-    
-    <h3 id="phase-3">Phase 3: Testing Fault Tolerance</h3>
-    <p>To demonstrate the fault tolerance capabilities of the load balancer:</p>
-    <ol start="12">
-        <li>Stopped one EC2 instance to simulate a failure</li>
-        <li>Observed the ALB's health check mechanism marking the stopped instance as unhealthy</li>
-        <li>Confirmed that all traffic was automatically redirected to the remaining healthy instance</li>
-        <li>Restarted the stopped instance and verified it was automatically returned to service</li>
-        <li>Observed traffic being distributed to both instances again</li>
-		<img src="Images/EC2_First_Stopped.png" alt="AWS-IAM Screenshot" width="400">
-		<img src="Images/TG_Status.png" alt="AWS-IAM Screenshot" width="400">
-		<img src="Images/Demo_ALB_Traffic.png" alt="AWS-IAM Screenshot" width="400">
-    </ol>
-    <p>This test confirmed that the load balancer could detect failed instances and automatically route traffic to healthy instances, providing continuous service availability.</p>
-    
-    <h3 id="phase-4">Phase 4: Advanced Load Balancer Configurations</h3>
-    
-    <h4>Enhanced Security Configuration</h4>
-    <p>I improved the security posture of the infrastructure by implementing a more restrictive traffic flow:</p>
-    <ol start="17">
-        <li>Modified the EC2 instance security group to only accept traffic from the load balancer</li>
-        <li>Removed direct public access to EC2 instances</li>
-        <li>Verified that direct access to instances via public IPs was no longer possible</li>
-		<img src="Images/LaunchWiz_SG_Demo_ALB.png" alt="AWS-IAM Screenshot" width="400">
-        <li>Confirmed that access through the ALB continued to function correctly</li>
-    </ol>
-    <p>This configuration ensures that all web traffic must flow through the load balancer, providing an additional security layer.</p>
-    
-    <h4>Custom Routing Rules</h4>
-    <p>I implemented advanced routing rules in the ALB to handle specific request patterns:</p>
-    <ol start="21">
-        <li>Created a custom routing rule with path-based routing</li>
-        <li>Configured the rule to return a custom error response for requests to the "/error" path</li>
-        <li>Set the rule priority to ensure proper processing order</li>
-		<img src="Images/Demo_404_Error_ALB_Rule.png" alt="AWS-IAM Screenshot" width="400">
-        <li>Tested the rule by accessing the "/error" path, confirming the custom error response</li>
-		<img src="Images/PageNotFound404_Error.png" alt="AWS-IAM Screenshot" width="400">
-    </ol>
+            
+            <h2 id="implementation-details">Implementation Details</h2>
+            
+            <h3 id="phase-1">Phase 1: Setting Up the Backend Infrastructure</h3>
+            <p>The first step was to create the backend servers that would handle the application traffic:</p>
+            <ol>
+                <li>Launched two EC2 instances named "My First Instance" and "My Second Instance"</li>
+                <li>Used Amazon Linux 2 on t2.micro instances for cost-effectiveness</li>
+                <li>Configured a security group (Launch-Wizard-1) to allow HTTP and SSH traffic</li>
+                <li>Implemented a bootstrap script using EC2 user data to initialize a simple web server on each instance</li>
+                <li>Verified direct access to each instance via their public IP addresses</li>
+            </ol>
+            <p>Each instance displayed a simple "Hello World" message with a unique identifier, confirming they were operational and serving content independently.</p>
+            <div class="image-gallery">
+                <img src="Images/helloWorld1.png" alt="AWS-IAM Screenshot" width="400">
+                <img src="Images/helloWorld2.png" alt="AWS-IAM Screenshot" width="400">
+            </div>
+            
+            <h3 id="phase-2">Phase 2: Implementing the Application Load Balancer</h3>
+            <p>After establishing the backend infrastructure, I implemented an Application Load Balancer to distribute traffic:</p>
+            <ol start="6">
+                <li>Created an Application Load Balancer (DemoALB) configured for internet-facing traffic</li>
+                <li>Deployed the ALB across multiple availability zones for high availability</li>
+                <li>Created a dedicated security group (demo-sg-load-balancer) with appropriate rules</li>
+                <li>Configured HTTP listener on port 80</li>
+                <li>Created a target group (demo-tg-alb) and registered both EC2 instances</li>
+                <li>Verified load balancer functionality by observing traffic distribution between instances</li>
+            </ol>
+            <div class="image-gallery">
+                <img src="Images/helloWorld2.png" alt="AWS-IAM Screenshot" width="400">
+                <img src="Images/helloWorld2.png" alt="AWS-IAM Screenshot" width="400">
+            </div>
+            <div class="image-gallery">
+                <img src="Images/SG_Demo_ALB.png" alt="AWS-IAM Screenshot" width="400">
+                <img src="Images/Demo_TG_ALB.png" alt="AWS-IAM Screenshot" width="400">
+                <img src="Images/Demo_ALB.png" alt="AWS-IAM Screenshot" width="400">
+                <img src="Images/PageAccess1.png" alt="AWS-IAM Screenshot" width="400">
+                <img src="Images/PageAccess2.png" alt="AWS-IAM Screenshot" width="400">
+            </div>
+            <p>The ALB successfully distributed traffic between both instances in a round-robin fashion, as evidenced by the changing instance identifiers in the response upon refreshing the browser.</p>
+            
+            <h3 id="phase-3">Phase 3: Testing Fault Tolerance</h3>
+            <p>To demonstrate the fault tolerance capabilities of the load balancer:</p>
+            <ol start="12">
+                <li>Stopped one EC2 instance to simulate a failure</li>
+                <li>Observed the ALB's health check mechanism marking the stopped instance as unhealthy</li>
+                <li>Confirmed that all traffic was automatically redirected to the remaining healthy instance</li>
+                <li>Restarted the stopped instance and verified it was automatically returned to service</li>
+                <li>Observed traffic being distributed to both instances again</li>
+            </ol>
+            <div class="image-gallery">
+                <img src="Images/EC2_First_Stopped.png" alt="AWS-IAM Screenshot" width="400">
+                <img src="Images/TG_Status.png" alt="AWS-IAM Screenshot" width="400">
+                <img src="Images/Demo_ALB_Traffic.png" alt="AWS-IAM Screenshot" width="400">
+            </div>
+            <p>This test confirmed that the load balancer could detect failed instances and automatically route traffic to healthy instances, providing continuous service availability.</p>
+            
+            <h3 id="phase-4">Phase 4: Advanced Load Balancer Configurations</h3>
+            
+            <h4>Enhanced Security Configuration</h4>
+            <p>I improved the security posture of the infrastructure by implementing a more restrictive traffic flow:</p>
+            <ol start="17">
+                <li>Modified the EC2 instance security group to only accept traffic from the load balancer</li>
+                <li>Removed direct public access to EC2 instances</li>
+                <li>Verified that direct access to instances via public IPs was no longer possible</li>
+                <li>Confirmed that access through the ALB continued to function correctly</li>
+            </ol>
+            <div class="image-gallery">
+                <img src="Images/LaunchWiz_SG_Demo_ALB.png" alt="AWS-IAM Screenshot" width="400">
+            </div>
+            <p>This configuration ensures that all web traffic must flow through the load balancer, providing an additional security layer.</p>
+            
+            <h4>Custom Routing Rules</h4>
+            <p>I implemented advanced routing rules in the ALB to handle specific request patterns:</p>
+            <ol start="21">
+                <li>Created a custom routing rule with path-based routing</li>
+                <li>Configured the rule to return a custom error response for requests to the "/error" path</li>
+                <li>Set the rule priority to ensure proper processing order</li>
+                <li>Tested the rule by accessing the "/error" path, confirming the custom error response</li>
+            </ol>
+            <div class="image-gallery">
+                <img src="Images/Demo_404_Error_ALB_Rule.png" alt="AWS-IAM Screenshot" width="400">
+                <img src="Images/PageNotFound404_Error.png" alt="AWS-IAM Screenshot" width="400">
+            </div>
 
-    <h4>Network Load Balancer Configurations</h4>
-    <p>AWS Network Load Balancers distribute incoming application traffic across multiple targets, ensuring high availability and low latency.</p>
-    <ol start="A">
-        <li>Created an Network Load Balancer (DemoNLB) configured for internet-facing traffic</li>
-        <li>Deployed the NLB across multiple availability zones for high availability</li>
-        <li>Created a dedicated security group (demo-sg-nlb) with appropriate rules</li>
-        <li>Configured HTTP listener on port 80</li>
-        <li>Created a target group (demo-tg-nlb) and registered both EC2 instances</li>
-		<li>Created a dedicated security group (demo-sg-nlb) with appropriate rules</li>
-		<li>I also examined the instances and their associated security group by navigating to **Security** and then **Security Groups** to open it. 
-		<li>In the inbound rules, it was configured to allow **SSH** access from **anywhere** and **HTTP** access from this security group.</li>
-		<li>An additional rule was added to also allow **HTTP** traffic from our Network Load Balancer.</li>
-        <li>Finally, verified load balancer functionality by observing traffic distribution between instances</li>
-		<img src="Images/Demo_SG_NLB.png" alt="AWS-IAM Screenshot" width="400">
-		<img src="Images/Demo_TG_NLB.png" alt="AWS-IAM Screenshot" width="400">
-		<img src="Images/LaunchWiz1_SG_NLB.png" alt="AWS-IAM Screenshot" width="400">
-		<img src="Images/Demo_NLB.png" alt="AWS-IAM Screenshot" width="400">	
-		<img src="Images/Demo_NLB_Traffic1.png" alt="AWS-IAM Screenshot" width="400">	
-    </ol>
-    <p>The NLB successfully distributed traffic between both instances in a round-robin fashion, as evidenced by the changing instance identifiers in the response upon refreshing the browser.</p>
-    </ol>	
-    <p>This demonstrates the ability to implement complex routing logic based on URL patterns, which is essential for modern web applications.</p>
-    
-    <h4>Session Stickiness Configuration</h4>
-    <p>To support applications that require session persistence:</p>
-    <ol start="25">
-        <li>Enabled sticky sessions at the target group level</li>
-        <li>Configured load balancer-generated cookies with a one-day expiration</li>
-        <li>Tested session stickiness by repeatedly refreshing the browser</li>
-        <li>Verified that requests from the same browser session were consistently routed to the same backend instance</li>
-        <li>Examined network traffic to confirm the presence and functionality of session cookies</li>
-    </ol>
-    <p>I also analyzed the different types of sticky session implementations:</p>
-    <ul>
-        <li>Application-based cookies (custom or load balancer-generated)</li>
-        <li>Duration-based cookies (AWSALB for ALB, AWSELB for Classic Load Balancer)</li>
-		<img src="Images/Demo_TG_ALB_Stickiness.png" alt="AWS-IAM Screenshot" width="400">
-		<img src="Images/Demo_TG_ALB_Stickiness_a.png" alt="AWS-IAM Screenshot" width="400">
-    </ul>
-    
-    <h4>Cross-Zone Load Balancing</h4>
-    <p>I studied and configured cross-zone load balancing to understand traffic distribution across availability zones:</p>
-    <ol start="30">
-        <li>Analyzed the default behavior of different load balancer types:
-            <ul>
-                <li>ALB: Cross-zone balancing enabled by default</li>
-                <li>NLB and Gateway LB: Cross-zone balancing disabled by default</li>
-            </ul>
-        </li>
-        <li>Configured cross-zone balancing settings on different load balancer types</li>
-        <li>Understood the cost implications of cross-zone data transfer</li>
-    </ol>
-    <p>This configuration ensures even distribution of traffic across all instances regardless of their availability zone, which is important for balanced scaling.</p>
-    
-    <h4>SSL/TLS Certificate Implementation</h4>
-    <p>To secure the application traffic, I explored SSL/TLS certificate implementation:</p>
-    <ol start="33">
-        <li>Explored HTTPS listener on port 443 for the ALB</li>
-        <li>Explored Configuration for TLS listener for the NLB</li>
-        <li>Explored certificate management options:
-            <ul>
-                <li>Amazon Certificate Manager (ACM)</li>
-                <li>IAM certificate management</li>
-                <li>Direct certificate import</li>
-            </ul>
-        </li>
-    </ol>
-    <p>This demonstrates my understanding of securing web traffic and implementing industry-standard encryption protocols.</p>
-    
-    <h2 id="technical-challenges">Technical Challenges and Solutions</h2>
-    <ol start="36">
-        <li><strong>Challenge</strong>: Ensuring instances remain accessible through the load balancer while restricting direct access<br>
-            <strong>Solution</strong>: Implemented security group rules that only allow traffic from the load balancer security group</li>
-        <li><strong>Challenge</strong>: Managing session persistence for applications requiring user state<br>
-            <strong>Solution</strong>: Configured sticky sessions with appropriate cookie settings and expiration policies</li>
-        <li><strong>Challenge</strong>: Understanding the performance implications of cross-zone load balancing<br>
-            <strong>Solution</strong>: Analyzed the default behaviors and cost implications for different load balancer types</li>
-    </ol>	
-    
-    <h2 id="project-outcomes">Project Outcomes</h2>
-    <p>This implementation achieved several key business objectives:</p>
-    <ol start="39">
-        <li><strong>High Availability</strong>: The application remains available even if individual instances fail</li>
-        <li><strong>Scalability</strong>: The infrastructure can easily scale by adding more instances to the target group</li>
-        <li><strong>Enhanced Security</strong>: Traffic flow is controlled and restricted to appropriate paths</li>
-        <li><strong>Flexibility</strong>: Advanced routing rules support complex application requirements</li>
-        <li><strong>Session Management</strong>: Support for stateful applications through sticky session configuration</li>
-    </ol>
-    
-    <h2 id="key-learnings">Key Learnings</h2>
-    <p>This project provided valuable insights into AWS load balancing technologies:</p>
-    <ol start="44">
-        <li>Different load balancer types (ALB, NLB, Gateway LB) serve different use cases based on protocol and performance requirements</li>
-        <li>Health checks are crucial for automatic failover and high availability</li>
-        <li>Security groups can be linked to create secure traffic flows</li>
-        <li>Advanced routing rules enable sophisticated application architectures</li>
-        <li>Session stickiness must be balanced against even load distribution</li>
-        <li>Cross-zone load balancing affects both performance and cost</li>
-        <li>SSL/TLS implementation is straightforward but requires proper certificate management</li>
-    </ol>
-    
-    <h1 id="auto-scaling-groups">Auto Scaling Groups in AWS: Implementation and Best Practices</h1>
-    <p>Auto Scaling Groups (ASGs) in AWS provide a powerful mechanism to ensure application availability and cost efficiency by automatically adjusting the number of EC2 instances based on demand. This project demonstrates the implementation of ASGs integrated with Application Load Balancers (ALBs) and various scaling policies to achieve optimal performance.</p>
-    
-    <h2 id="architecture-overview">Architecture Overview</h2>
-    <p>The architecture implemented consists of:</p>
-    <ul>
-        <li><strong>Launch Template</strong>: Defines the configuration of EC2 instances to be launched</li>
-        <li><strong>Auto Scaling Group</strong>: Manages the lifecycle of EC2 instances</li>
-        <li><strong>Application Load Balancer</strong>: Distributes traffic to healthy instances</li>
-        <li><strong>Target Group</strong>: Registers instances with the load balancer</li>
-        <li><strong>Scaling Policies</strong>: Determine when and how to scale instances</li>
-        <li><strong>CloudWatch Alarms</strong>: Trigger scaling actions based on metrics</li>
-    </ul>
-    
-    <h2 id="implementation-steps">Implementation Steps</h2>
-    
-    <h3 id="launch-template">Creating a Launch Template</h3>
-    <p>The launch template defines the configuration for EC2 instances that will be created by the Auto Scaling Group.</p>
-    <ol start="51">
-        <li>Navigate to the EC2 console and select "Launch Templates" from the left navigation panel</li>
-        <li>Click "Create Launch Template"</li>
-        <li>Configure the template with the following settings:
-            <ul>
-                <li><strong>Name</strong>: <code>my-demo-template</code></li>
-                <li><strong>Description</strong>: <code>Template for ASG demo</code></li>
-                <li><strong>AMI</strong>:e.g. Amazon Linux 2 (x86)</li>
-                <li><strong>Instance Type</strong>: t2.micro (Free tier eligible)</li>
-                <li><strong>Key Pair</strong>: EC2-tutorial (or your existing key pair)</li>
-                <li><strong>Security Group</strong>: Select an existing security group (e.g., launch-wizard-1)</li>
-                <li><strong>Storage</strong>: 8 GB GP2 volume</li>
-                <li><strong>User Data</strong>: Install and configure a web server</li>
-            </ul>
-        </li>
-    </ol>
-    <pre>#!/bin/bash
-yum update -y
-yum install -y httpd
-systemctl start httpd
-systemctl enable httpd
-echo "&lt;h1&gt;Hello World from $(hostname -f)&lt;/h1&gt;" &gt; /var/www/html/index.html</pre>
-    
-    <h3 id="setup-asg">Setting Up an Auto Scaling Group</h3>
-    <ol start="54">
-        <li>Navigate to "Auto Scaling Groups" in the EC2 console</li>
-        <li>Click "Create Auto Scaling Group"</li>
-        <li>Configure the ASG with the following settings:
-            <ul>
-                <li><strong>Name</strong>: <code>Demo-ASG</code></li>
-                <li><strong>Launch Template</strong>: Select the previously created template</li>
-                <li><strong>VPC and Availability Zones</strong>: Select your VPC and multiple AZs for high availability</li>
-                <li><strong>Load Balancer Integration</strong>: Enable</li>
-                <li><strong>Target Group</strong>: Select your existing ALB target group</li>
-                <li><strong>Health Checks</strong>: Enable both EC2 and ELB health checks</li>
-                <li><strong>Desired Capacity</strong>: 1</li>
-                <li><strong>Minimum Capacity</strong>: 1</li>
-                <li><strong>Maximum Capacity</strong>: 1 (to be modified later for scaling demonstrations)</li>
-            </ul>
-        </li>
-    </ol>
-    <img src="Images/Demo_Launch_TemplateASG.png" alt="AWS-IAM Screenshot" width="400">
-	<img src="Images/Demo_ASG1.png" alt="AWS-IAM Screenshot" width="400">
-	<img src="Images/Demo_ASG2.png" alt="AWS-IAM Screenshot" width="400">
-	<img src="Images/Demo_ASG.png" alt="AWS-IAM Screenshot" width="400">
-	<img src="Images/Demo_ASG_Activity.png" alt="AWS-IAM Screenshot" width="400">
-    <h3 id="integrating-lb">Integrating with Load Balancers</h3>
-    <p>Connecting your ASG with a load balancer ensures traffic is distributed across healthy instances:</p>
-    <ol start="57">
-        <li>During ASG creation, select "Attach to an existing load balancer"</li>
-        <li>Choose "Choose from your load balancer target groups"</li>
-        <li>Select your target group (e.g., <code>demo-tg-alb</code>)</li>
-        <li>This integration ensures new instances are automatically registered with the load balancer</li>
-        <li>When instances are terminated, they are automatically deregistered</li>
-		<img src="Images/Demo_TG_UnhealthInst.png" alt="AWS-IAM Screenshot" width="400">
-		<img src="Images/HealthyInst.png" alt="AWS-IAM Screenshot" width="400">
-    </ol>
-    
-    <h3 id="health-check">Health Check Configuration</h3>
-    <p>Proper health check configuration ensures that unhealthy instances are replaced:</p>
-    <ol start="62">
-        <li>Enable EC2 health checks to detect instance-level failures</li>
-        <li>Enable ELB health checks to detect application-level failures</li>
-        <li>Set appropriate health check grace periods to allow instances time to initialize</li>
-    </ol>
-    
-    <h2 id="scaling-policies">Scaling Policies</h2>
-    
-    <h3 id="manual-scaling">Manual Scaling</h3>
-    <p>Manual scaling allows you to adjust capacity as needed:</p>
-    <ol start="65">
-        <li>Select your ASG and click "Edit"</li>
-        <li>Modify the "Desired Capacity" value</li>
-        <li>Ensure the new desired capacity is within the minimum and maximum capacity range</li>
-        <li>The ASG will automatically launch or terminate instances to match the desired capacity</li>
-    </ol>
-    <img src="Images/Demo_ASG_DynamicScaling.png" alt="AWS-IAM Screenshot" width="400">
-    <h3 id="target-tracking">Dynamic Scaling with Target Tracking</h3>
-    <p>Target tracking is the simplest way to implement dynamic scaling:</p>
-    <ol start="69">
-        <li>Select your ASG and navigate to "Automatic Scaling"</li>
-        <li>Select "Create Target Tracking Scaling Policy"</li>
-        <li>Configure the policy:
-            <ul>
-                <li><strong>Policy Name</strong>: <code>target-tracking-policy</code></li>
-                <li><strong>Metric</strong>: Average CPU Utilization</li>
-                <li><strong>Target Value</strong>: 40%</li>
-            </ul>
-        </li>
-        <li>The ASG will automatically adjust capacity to maintain the target metric value</li>
-		
-		
-    </ol>
-    <p>Implementation example:</p>
-    <pre>Metric: Average CPU Utilization
-Target: 40%
-Scale Out: When CPU &gt; 40% for 3 consecutive data points (3 minutes)
-Scale In: When CPU &lt; 28% for 15 consecutive data points (15 minutes)</pre>
-
-    
-    <h3 id="step-scaling">Step Scaling</h3>
-    <p>Step scaling provides more granular control over scaling actions:</p>
-    <ol start="73">
-        <li>You can create CloudWatch alarms for your scaling conditions</li>
-        <li>Configure step scaling policies with different adjustment amounts based on alarm thresholds</li>
-        <li>For example:
-            <ul>
-                <li>If CPU &gt; 60%, add 2 instances</li>
-                <li>If CPU &gt; 80%, add 4 instances</li>
-            </ul>
-        </li>
-    </ol>
-    
-    <h3 id="simple-scaling">Simple Scaling</h3>
-    <p>Simple scaling allows basic scale out/in based on a single CloudWatch alarm:</p>
-    <ol start="76">
-        <li>Create a CloudWatch alarm for your scaling condition</li>
-        <li>Configure a simple scaling policy that adds or removes a specific number of instances or percentage of the group</li>
-    </ol>
-    
-    <h3 id="scheduled-scaling">Scheduled Scaling</h3>
-    <p>Scheduled scaling is useful for predictable workload patterns:</p>
-    <ol start="78">
-        <li>Navigate to "Scheduled Actions" in your ASG, where you can:</li>
-        <li>Create a schedule with specific capacity settings</li>
-        <li>Configure the recurrence pattern (one-time, daily, weekly, etc.)</li>
-        <li>Specify start and end times if applicable</li>
-    </ol>
-    
-    <h3 id="predictive-scaling">Predictive Scaling</h3>
-    <p>Predictive scaling uses machine learning to forecast capacity needs:</p>
-    <ol start="82">
-        <li>Navigate to "Predictive Scaling Policies"</li>
-        <li>Select metrics to analyze (e.g., CPU utilization)</li>
-        <li>Set target utilization values</li>
-        <li>AWS will use machine learning to analyze historical patterns and scale proactively</li>
-    </ol>
-    <!--
-    <h2 id="testing">Testing</h2>
-    
-    <h3 id="stress-testing">Stress Testing</h3>
-    <p>To test dynamic scaling policies:</p>
-    <ol start="86">
-        <li>Connect to an EC2 instance using EC2 Instance Connect</li>
-        <li>Install the stress utility:
-            <pre>sudo amazon-linux-extras install epel -y
-sudo yum install stress -y</pre>
-        </li>
-        <li>Run a stress test to increase CPU utilization:
-            <pre>stress -c 4</pre>
-        </li>
-        <li>Monitor the ASG activities and CloudWatch metrics to observe scaling actions</li>
-    </ol>
-    
-    <h3 id="monitoring">Monitoring Scaling Activities</h3>
-    <ol start="90">
-        <li>Navigate to the "Activity" tab in your ASG</li>
-        <li>Review "Activity History" to see scaling actions</li>
-        <li>Check CloudWatch alarms to understand what triggered the scaling</li>
-        <li>Monitor instance states in the "Instance Management" tab</li>
-    </ol>
-    
-    <h2 id="demo-results">Demonstration Results</h2>
-    <p>The following results were observed during testing:</p>
-    <ol start="94">
-        <li><strong>Initial State</strong>:
-            <ul>
-                <li>1 EC2 instance running</li>
-                <li>CPU utilization near 0%</li>
-                <li>Instance healthy and registered with the load balancer</li>
-            </ul>
-        </li>
-        <li><strong>After Stress Test Began</strong>:
-            <ul>
-                <li>CPU utilization increased to nearly 100%</li>
-                <li>CloudWatch alarm triggered (CPU &gt; 40%)</li>
-                <li>ASG scaled out from 1 to 2 instances</li>
-                <li>As CPU remained high, scaled to 3 instances</li>
-            </ul>
-        </li>
-        <li><strong>After Stress Test Ended</strong>:
-            <ul>
-                <li>CPU utilization dropped below 28%</li>
-                <li>After 15 consecutive data points, scale-in action triggered</li>
-                <li>ASG reduced capacity from 3 to 2 instances</li>
-                <li>After continued low utilization, reduced to 1 instance</li>
-            </ul>
-        </li>
-    </ol>
-    <p>This demonstration confirmed the target tracking policy correctly adjusted capacity based on CPU utilization.</p>
-	-->
-    
-    <h2 id="best-practices">Best Practices and Recommendations</h2>
-    <ol start="97">
-        <li><strong>Right-size your instances</strong>: Choose appropriate instance types for your workload</li>
-        <li><strong>Set appropriate thresholds</strong>: Avoid scaling too aggressively or too conservatively</li>
-        <li><strong>Configure scale-in protection</strong>: Prevent important instances from being terminated</li>
-        <li><strong>Use multiple AZs</strong>: Distribute instances across availability zones for high availability</li>
-        <li><strong>Implement proper health checks</strong>: Ensure unhealthy instances are detected and replaced</li>
-        <li><strong>Use cool-down periods</strong>: Prevent rapid scaling oscillations</li>
-        <li><strong>Combine scaling policies</strong>: Use scheduled scaling for predictable patterns and dynamic scaling for unexpected changes</li>
-        <li><strong>Monitor scaling activities</strong>: Regularly review scaling actions and adjust policies as needed</li>
-    </ol>
-    
-    <h2 id="conclusion">Conclusion</h2>
-    <p>This project demonstrates my ability to design, implement, and configure AWS load balancing solutions that provide high availability, security, and scalability for web applications. The implementation showcases both basic functionality and advanced configurations that address real-world application requirements. By successfully completing this project, I've shown proficiency in AWS infrastructure, networking concepts, and security practices that are essential for modern cloud environments.</p>
-    <p>I have demonstrated the implementation of Auto Scaling Groups in AWS to create a scalable and highly available web application architecture. By configuring launch templates, integrating with load balancers, and implementing various scaling policies, we achieved automatic adjustment of capacity based on demand.</p>
-    <p>The target tracking policy effectively maintained CPU utilization around the target value, scaling out during high load and scaling in during periods of low utilization. This approach ensures optimal performance while minimizing costs by running only the necessary number of instances.</p>
-    <p>Auto Scaling Groups provide a powerful solution for handling variable workloads and ensuring application availability without manual intervention.</p>
-</body>
-</html>
+            <h4>Network Load Balancer Configurations</h4>
+            <p>AWS Network Load Balancers distribute incoming application traffic across multiple targets, ensuring high availability and low latency.</p>
+            <ol>
+                <li>Created an Network Load Balancer (DemoNLB) configured for internet-facing traffic</li>
+                <li>Deployed the NLB across multiple availability zones for high availability</li>
+                <li>Created a dedicated security group (demo-sg-nlb) with appropriate rules</li>
+                <li>Configured HTTP listener on port 80</li>
+                <li>Created a target group (demo-tg-nlb) and registered both EC2 instances</li>
+                <li>Created a dedicated security group (demo-sg-nlb) with appropriate rules</li>
+                <li>I also examined the instances and their associated security group by navigating to <strong>Security</strong> and then <strong>Security Groups</strong> to open it.</li>
+                <li>In the inbound rules, it was configured to allow <strong>SSH</strong> access from <strong>anywhere</strong> and <strong>HTTP</strong> access from this security group.</li>
+                <li>An additional rule was added to also allow <strong>HTTP</strong> traffic from our Network Load Balancer.</li>
+                <li>Finally, verified load balancer functionality
